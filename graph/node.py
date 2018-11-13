@@ -33,10 +33,11 @@ def back_to_tree( name_of_node='root', list=[] ):
     node_n = get_node( name_of_node, list)
     if node_n != None: # if node is not empty
         children = []
-        for node in node_n:
-            if node['name'] not in children:
-                children.append( node['name'] )
-                continue
+        for node in node_n['children']:
+            for child in children:
+                if node not in child.name:
+                    children.append( child )
+                    continue
             children.append( back_to_tree( node, list )  )
         c_node = node( name_of_node, children )
         c_node.val = node_n['val']

@@ -23,15 +23,12 @@ def list_creation( new_object, list=[] ): # assume list is emtpy if nothing is g
     for child in new_object.children: # recursively add each child
         list = list_creation( child, list)
     return list
-
 # get the node based on name
-
 def get_node( name_of_node, list):
     for node in list:
         if node.name == name_of_node:
             return node
     return []
-
 # transforms list to a tree 
 def back_to_tree( name_of_node='root', list=[] ):
     node_n = get_node( name_of_node, list)

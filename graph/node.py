@@ -18,35 +18,31 @@ def list_creation( new_object, list=[] ): # assume list is emtpy if nothing is g
     children = []  # list of strings
     for child in new_object.children: # get string names of children
         children.append( str( child.name ) )
-    dictionary = {'name':new_object.name, 'children':children, 'val':new_object.val }
-    list.append( dictionary )
+    list.append( {'name':new_object.name, 'children':children, 'val':new_object.val } )
     for child in new_object.children: # recursively add each child
         list = list_creation( child, list)
     return list
 # get the node based on name
 def get_node( name_of_node, list):
     for node in list:
-        if node.name == name_of_node:
-            return node
-    return []
+        if name_of_node in node:
+            return node[ name_of_node ]
+    return None
 # transforms list to a tree 
 def back_to_tree( name_of_node='root', list=[] ):
     node_n = get_node( name_of_node, list)
-    if node_n != []: # if node is not empty
+    if node_n != None: # if node is not empty
         children = []
-        for n_node in node_n['children']:
-            if n_node.name not in children:
-                children.append( n_node.name )
+        for node in node_n:
+            if node['name'] not in children:
+                children.append( node['name'] )
                 continue
-            children.append( back_to_tree(n_node, list) )
+            children.append( back_to_tree( node, list )  )
+        c_node = node( name_of_node, children )
+        c_node.val = node_n['val']
+        return c_node
     else:
-        return []
-    c_node = node( name_of_node, children )
-    c_node.val = node_n['val']
-    return c_node
-
-def save_tofile( list ):
-    print('ho')
+        return None
 
     
 

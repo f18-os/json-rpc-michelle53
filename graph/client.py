@@ -27,8 +27,7 @@ list = list_creation(root)
 # do this increment remotely:
 print("graph after increment")
 list = server.nop_incrementation( list )
-save_tofile( list )
 
-root = back_to_tree( 'root', list)
+#root = back_to_tree( 'root', list)
 root.show()
 rpc.close() # Closes the socket 's' also
